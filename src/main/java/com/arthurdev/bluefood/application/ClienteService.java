@@ -17,7 +17,12 @@ public class ClienteService {
 		if (!validateEmail(cliente.getEmail(), cliente.getId())) {
 			throw new ValidatrionException("o email esta duplicado");
 		}
-
+		if (cliente.getId() != null) {
+            Cliente clienteDB = clienteRepository.findById(cliente.getId()).orElseThrow();   //orElseThrow erro do sistema , erro de progamaçao
+            cliente.setSenha(clienteDB.getSenha());
+		} else {
+            cliente.encryptPassword();
+		}
 		clienteRepository.save(cliente);
 	}
 

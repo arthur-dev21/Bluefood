@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import antlr.StringUtils;
+
 @SuppressWarnings("serial")
 @MappedSuperclass
 public class Usuario implements Serializable {
@@ -37,6 +39,11 @@ public class Usuario implements Serializable {
 	@Pattern(regexp = "[0-9]{10,11}" , message = "o telefone tem formato invalido")
 	@Column(length = 11 , nullable = false)
 	private String telefone;
+	
+	
+	public void encryptPassword() {
+		this.senha = com.arthurdev.bluefood.util.StringUtils.encrypt(this.senha);
+	}
 
 	
 	public Integer getId() {

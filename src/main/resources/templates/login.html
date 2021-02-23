@@ -5,7 +5,7 @@
 
 <body>
 
- <div layout:fragment="content">
+	<div layout:fragment="content">
 		<div>
 			<img th:src="@{/images/bf_iconeUsuario.png}" id="imgIconeUsuario">
 			<h1>Autenticaï¿½ï¿½o</h1>
@@ -18,17 +18,24 @@
 				</fieldset>
 			</form>
 			<br>
-	
-			<div id="mensagemDeErro">Aqui vai um exemplo de mensagem de erro
-			</div>
-			<br> <input type="button"
-				value="Gostaria de criar a minha conta de usuï¿½rio"
-				onClick="location.href='clienteCadastro.html';"> <br> <input
-				type="button" value="Gostaria de criar a minha conta de restaurante"
-				onClick="location.href='restauranteCadastro.html';">
+
+			<div id="mensagemDeErro">Aqui vai um exemplo de mensagem de
+				erro</div>
+			<br>
+
+
+			<form method="get" th:action="@{/public/cliente/new}">
+				<input type="submit"
+					value="Gostaria de criar a minha conta de cliente" />
+			</form>
+
+			<form method="get" th:action="@{/public/restaurante/new}">
+				<input type="submit"
+					value="Gostaria de criar a minha conta de restaurante" />
+			</form>
 		</div>
 
- </div>
+	</div>
 
 	<!-- Rodapï¿½ - Inï¿½cio -->
 	<br>

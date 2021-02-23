@@ -23,7 +23,7 @@
 						</div><br /><br />
 					
 					<label for="cpf">CPF: </label><br>	
-					<input type="text" id="cpf" name="cpf" placeholder="CPF..."  th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''"><br><br>
+					<input type="text" id="cpf" name="cpf" placeholder="CPF..."  th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''" onkeydown="return isNumberKey(event);"><br><br>
 					<div id="mensagemDeErro" th:if="${#fields.hasErrors('cpf')}">
 							<span th:errors="*{cpf}"></span>
 						</div><br /><br />
@@ -35,14 +35,14 @@
 						</div><br /><br />
 					
 					<label for="telefone">Telefone: </label><br>	
-					<input type="text" id="telefone" name="telefone" placeholder="Telefone..."  th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"><br><br>
+					<input type="text" id="telefone" name="telefone" placeholder="Telefone..."  th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" onkeydown="return isNumberKey(event);"><br><br>
 					<div id="mensagemDeErro" th:if="${#fields.hasErrors('telefone')}">
 							<span th:errors="*{telefone}"></span>
 						</div>
 						<br /><br />
 					
 					<label for="cep">CEP: </label><br>	
-					<input type="text" id="cep" name="cep" placeholder="CEP..."  th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'cep' : ''"><br><br>
+					<input type="text" id="cep" name="cep" placeholder="CEP..."  th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'cep' : ''" onkeydown="return isNumberKey(event);"><br><br>
 					<div id="mensagemDeErro" th:if="${#fields.hasErrors('cep')}">
 							<span th:errors="*{cep}"></span>
 						</div>

@@ -2,10 +2,15 @@ package com.arthurdev.bluefood.domain.usuario;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @MappedSuperclass
@@ -15,14 +20,25 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	@NotBlank(message = "o NOME nao pode ser vazio")
+	@Size(max = 80, message = "o NOME é muito grande")
 	private String nome;
 	
+	@NotBlank(message = "o EMAIL nao pode ser vazio")
+	@Size(max = 60, message = "o EMAIL é muito grande")
+	@Email(message = "o formato do EMAIL é invalido")
 	private String email;
 	
+	@NotBlank(message = "a SENHA nao pode ser vazia")
+	@Size(max = 80 , message = "a SENHA é muito grande")
 	private String senha;
 	
+	@NotBlank(message = "o telefone nao pode ser vazio")
+	@Pattern(regexp = "[0-9]{10-11}" , message = "o telefone tem formato invalido")
+	@Column(length = 11 , nullable = false)
 	private String telefone;
 
+	
 	public Integer getId() {
 		return id;
 	}

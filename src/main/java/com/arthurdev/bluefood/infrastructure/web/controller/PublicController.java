@@ -35,7 +35,7 @@ public class PublicController {
 			clienteService.saveCliente(cliente);
             model.addAttribute("msg", "cliente gravado com sucesso");
 		}
-		model.addAttribute("cliente", new Cliente());
+		
 		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
 	}

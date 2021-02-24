@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arthurdev.bluefood.application.ClienteService;
+import com.arthurdev.bluefood.application.RestauranteService;
 import com.arthurdev.bluefood.application.ValidatrionException;
 import com.arthurdev.bluefood.domain.cliente.Cliente;
+import com.arthurdev.bluefood.domain.restaurante.Restaurante;
+import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
 
 @Controller
 @RequestMapping("/public")
@@ -21,7 +24,10 @@ public class PublicController {
 
 	@Autowired
 	private ClienteService clienteService;
-
+	
+	@Autowired
+    private RestauranteService restauranteService;
+  
 	@GetMapping("/cliente/new")
 	public String newCliente(Model model) {
 		model.addAttribute("cliente", new Cliente());
@@ -43,5 +49,30 @@ public class PublicController {
 		
 		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
+	}
+	
+	//--------------------------------restaurante----------------------------------------------
+	
+	@GetMapping("/restaurante/new")
+	public String newRestaurante(Model model) {
+		model.addAttribute("restaurante", new Cliente());
+		ControllerHelper.setEditMode(model, false);
+		return "restaurante-cadastro";
+	}
+	
+	@PostMapping("/restaurante/save")
+	public String saveRestaurante(@ModelAttribute("restaurante") @Valid Restaurante restaurante,  Errors errors, Model model) {
+
+		if (!errors.hasErrors()) {
+			try {
+				restauranteService.saveRestaurante(restaurante);
+				model.addAttribute("msg", "restaurante gravado com sucesso");
+			} catch (ValidatrionException e) {
+				errors.rejectValue("email", null, e.getMessage());
+			}
+		}
+		
+		ControllerHelper.setEditMode(model, false);
+		return "restaurante-cadastro";
 	}
 }

@@ -1,9 +1,14 @@
 package com.arthurdev.bluefood.domain.restaurante;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -40,8 +45,14 @@ public class Restaurante extends Usuario {
 	@Min(0)
 	@Max(120)
 	private Integer tempoEntregaBase;
-
-	
+    
+	@ManyToMany                                                               //cria um relacionamneto muitos para muitos
+	@JoinTable(                                                                //define os criterios da nova tabela
+			name="restaurante_has_categoria",                                 //nome da nova tabela
+			joinColumns = @JoinColumn(name="restaurante_id"),                 // o nome da coluna que vai fazer refenecia a restaurante na nova tabela
+			inverseJoinColumns = @JoinColumn(name="categoria_restaurante_id") //relacionamento do outro lado que no caso é categoria
+			)                                                                 
+	private Set<CategoriaRestaurante>categorias= new HashSet<>(0);                            //o atributo do set "Categoriarestaurante" sera o "categoria_restaurante_id"
 	
 	
 	public String getCnpj() {

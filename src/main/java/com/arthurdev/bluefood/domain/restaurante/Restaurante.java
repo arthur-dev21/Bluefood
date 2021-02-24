@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.arthurdev.bluefood.domain.usuario.Usuario;
+import com.arthurdev.bluefood.util.FileType;
 
 
 @SuppressWarnings("serial")
@@ -62,7 +63,7 @@ public class Restaurante extends Usuario {
 		if(getId() ==null) {                                                           //id nao pode ser nulo pois tem que esta preenchido
 			throw new IllegalStateException("é preciso primeiro gravar o registro");
 		}
-		this.logotipo=String.format("%04d-logo.%s",getId() , ".png");                                //pege o primeiro parametro de args , complete com "0" a esquerda ate que o tamanho fique com tamanho "4"
+		this.logotipo=String.format("%04d-logo.%s",getId() , FileType.of(logotipoFile.getContentType()).getExtension());                                //pege o primeiro parametro de args , complete com "0" a esquerda ate que o tamanho fique com tamanho "4"
 	}
 
 	public MultipartFile getLogotipoFile() {

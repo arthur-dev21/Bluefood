@@ -13,7 +13,8 @@ public class RestauranteService {
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 	
-	
+	@Autowired
+	private ImageService imageService;
 
 	public void saveRestaurante(Restaurante restaurante) throws ValidatrionException {
 
@@ -27,7 +28,8 @@ public class RestauranteService {
 			restaurante.encryptPassword();
 			restaurante=restauranteRepository.save(restaurante);             //de acordo com o gerenciamento de entidades da jpa , o metodo save(), retorna uma instancia de restaurante , entao qualquer mudandança sera refletido no banco de dados
 			restaurante.setLogotipoFileName();
-			//falta o upload
+			imageService.uploadLogotipo(restaurante.getLogotipoFile(), restaurante.getLogotipo());
+			
 		}
 	}
 

@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.arthurdev.bluefood.domain.usuario.Usuario;
 
 
@@ -34,7 +36,7 @@ public class Restaurante extends Usuario {
 	@Size(max = 80)
 	private String logotipo;
 	
-	
+	private transient MultipartFile logotipoFile;
 	
 	@NotNull(message = "A taxa de entrega não pode ser vazia")
 	@Min(0)
@@ -54,8 +56,22 @@ public class Restaurante extends Usuario {
 			)                                                                 
 	private Set<CategoriaRestaurante>categorias= new HashSet<>(0);                            //o atributo do set "Categoriarestaurante" sera o "categoria_restaurante_id"
 	
-	
-	
+	//metodo para colocar um nome para o restaurante
+	public void setLogotipoFileName() {
+		
+		if(getId() ==null) {                                                           //id nao pode ser nulo pois tem que esta preenchido
+			throw new IllegalStateException("é preciso primeiro gravar o registro");
+		}
+		this.logotipo=String.format("%04d-logo.%s",getId() , ".png");                                //pege o primeiro parametro de args , complete com "0" a esquerda ate que o tamanho fique com tamanho "4"
+	}
+
+	public MultipartFile getLogotipoFile() {
+		return logotipoFile;
+	}
+
+	public void setLogotipoFile(MultipartFile logotipoFile) {
+		this.logotipoFile = logotipoFile;
+	}
 
 	public String getCnpj() {
 		return cnpj;

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" >
 	
 	<body>
 		<div layout:fragment="content">
@@ -13,9 +13,11 @@
 					<span th:text="${msg}"></span><br />
 				</div>
 		
-				<form method="post" th:object="${restaurante}" th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" >
+				<form method="post" th:object="${restaurante}" th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" enctype="multipart/form-data">
 					<fieldset>
-						<input type="hidden" th:field="*{id}" />
+						<inpu
+						
+						t type="hidden" th:field="*{id}" />
 					
 						<label for="nome">Nome do Restaurante: </label><br />	
 						<input type="text" id="nome" name="nome" placeholder="Nome..." th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''" /><br />
@@ -61,7 +63,7 @@
 						
 						<div th:if="${!editMode}">
 							<label for="logotipo">Logotipo: </label><br />	
-							<input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..." />
+							<input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."  th:field="*{logotipoFile}"/>
 							
 							<br /><br />
 						</div>
@@ -75,7 +77,7 @@
 						</div>
 						<br /><br />
 								
-						<div th:if="${!editMode}">
+					<div th:if="${!editMode}">
 							<label for="senha">Senha: </label><br />	
 							<input type="password" id="senha" name="senha" placeholder="Senha..." th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''" /><br />
 							<div id="mensagemDeErro" th:if="${#fields.hasErrors('senha')}">

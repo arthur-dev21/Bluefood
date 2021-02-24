@@ -25,8 +25,10 @@ public class RestauranteService {
 			restaurante.setSenha(restauranteDB.getSenha());
 		} else {
 			restaurante.encryptPassword();
+			restaurante=restauranteRepository.save(restaurante);             //de acordo com o gerenciamento de entidades da jpa , o metodo save(), retorna uma instancia de restaurante , entao qualquer mudandança sera refletido no banco de dados
+			restaurante.setLogotipoFileName();
+			//falta o upload
 		}
-		restauranteRepository.save(restaurante);
 	}
 
 	private boolean validateEmail(String email, Integer id) {

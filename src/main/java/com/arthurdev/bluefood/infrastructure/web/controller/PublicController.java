@@ -1,7 +1,6 @@
 package com.arthurdev.bluefood.infrastructure.web.controller;
 
-import java.util.DuplicateFormatFlagsException;
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -18,10 +17,10 @@ import com.arthurdev.bluefood.application.ClienteService;
 import com.arthurdev.bluefood.application.RestauranteService;
 import com.arthurdev.bluefood.application.ValidatrionException;
 import com.arthurdev.bluefood.domain.cliente.Cliente;
-import com.arthurdev.bluefood.domain.restaurante.CategoriaRestaurante;
+
 import com.arthurdev.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
-import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
+
 
 @Controller
 @RequestMapping("/public")

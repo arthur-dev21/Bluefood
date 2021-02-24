@@ -27,7 +27,7 @@ public class Restaurante extends Usuario {
     
 	
 	@NotBlank(message = "O CNPJ não pode ser vazio")
-	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inv�lido")
+	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato invalido")
 	@Column(length = 14, nullable = false)
 	private String cnpj;
 	
@@ -55,12 +55,22 @@ public class Restaurante extends Usuario {
 	private Set<CategoriaRestaurante>categorias= new HashSet<>(0);                            //o atributo do set "Categoriarestaurante" sera o "categoria_restaurante_id"
 	
 	
+	
+
 	public String getCnpj() {
 		return cnpj;
 	}
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public Set<CategoriaRestaurante> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Set<CategoriaRestaurante> categorias) {
+		this.categorias = categorias;
 	}
 
 	public String getLogotipo() {

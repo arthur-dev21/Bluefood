@@ -1,5 +1,8 @@
 package com.arthurdev.bluefood.infrastructure.web.controller;
 
+import java.util.DuplicateFormatFlagsException;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import com.arthurdev.bluefood.application.ClienteService;
 import com.arthurdev.bluefood.application.RestauranteService;
 import com.arthurdev.bluefood.application.ValidatrionException;
 import com.arthurdev.bluefood.domain.cliente.Cliente;
+import com.arthurdev.bluefood.domain.restaurante.CategoriaRestaurante;
+import com.arthurdev.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
 import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
 
@@ -27,6 +32,11 @@ public class PublicController {
 	
 	@Autowired
     private RestauranteService restauranteService;
+	
+	@Autowired
+	private CategoriaRestauranteRepository categoriaRestauranteRepository;
+	
+	
   
 	@GetMapping("/cliente/new")
 	public String newCliente(Model model) {
@@ -55,8 +65,9 @@ public class PublicController {
 	
 	@GetMapping("/restaurante/new")
 	public String newRestaurante(Model model) {
-		model.addAttribute("restaurante", new Cliente());
+		model.addAttribute("restaurante", new Restaurante());
 		ControllerHelper.setEditMode(model, false);
+		ControllerHelper.addCategoriaRequest(categoriaRestauranteRepository, model);
 		return "restaurante-cadastro";
 	}
 	

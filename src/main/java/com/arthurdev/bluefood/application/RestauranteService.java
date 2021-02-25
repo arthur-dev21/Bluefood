@@ -29,6 +29,7 @@ public class RestauranteService {
 			restaurante=restauranteRepository.save(restaurante);             //de acordo com o gerenciamento de entidades da jpa , o metodo save(), retorna uma instancia de restaurante , entao qualquer mudandança sera refletido no banco de dados
 			restaurante.setLogotipoFileName();
 			imageService.uploadLogotipo(restaurante.getLogotipoFile(), restaurante.getLogotipo());
+			restauranteRepository.save(restaurante); 
 			
 		}
 	}

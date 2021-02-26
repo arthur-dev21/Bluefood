@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.arthurdev.bluefood.application.ClienteService;
-import com.arthurdev.bluefood.application.RestauranteService;
-import com.arthurdev.bluefood.application.ValidatrionException;
+import com.arthurdev.bluefood.application.service.ClienteService;
+import com.arthurdev.bluefood.application.service.RestauranteService;
+import com.arthurdev.bluefood.application.service.ValidatrionException;
 import com.arthurdev.bluefood.domain.cliente.Cliente;
 
 import com.arthurdev.bluefood.domain.restaurante.CategoriaRestauranteRepository;

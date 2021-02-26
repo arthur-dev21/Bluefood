@@ -13,25 +13,24 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "categoria_restaurante")
 public class CategoriaRestaurante implements Serializable {
-    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotNull
 	@Size(max = 20)
 	private String nome;
-	
+
 	@NotNull
 	@Size(max = 50)
 	private String imagem;
-	
-	@ManyToMany(mappedBy = "categorias")                      //nome do atributo de referencia no set
+
+	@ManyToMany(mappedBy = "categorias") // nome do atributo de referencia no set
 	private Set<Restaurante> restaurantes = new HashSet<>(0);
 
 	public Integer getId() {
@@ -90,8 +89,5 @@ public class CategoriaRestaurante implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

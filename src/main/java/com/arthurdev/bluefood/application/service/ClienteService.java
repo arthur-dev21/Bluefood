@@ -1,4 +1,4 @@
-package com.arthurdev.bluefood.application;
+package com.arthurdev.bluefood.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

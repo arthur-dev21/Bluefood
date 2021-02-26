@@ -1,4 +1,4 @@
-package com.arthurdev.bluefood.application;
+package com.arthurdev.bluefood.application.service;
 
 @SuppressWarnings("serial")
 public class ValidatrionException extends Exception {

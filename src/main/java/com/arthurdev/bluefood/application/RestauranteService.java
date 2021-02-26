@@ -1,11 +1,13 @@
 package com.arthurdev.bluefood.application;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
+import com.arthurdev.bluefood.domain.cliente.Cliente;
+import com.arthurdev.bluefood.domain.cliente.ClienteRepository;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
 import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
 
@@ -16,9 +18,12 @@ public class RestauranteService {
 	private RestauranteRepository restauranteRepository;
 	
 	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
 	private ImageService imageService;
     
-	@Transactional
+	@Transactional                                                                       // caso vc queira fazer mais de uma operaçao no BD é ideal que seja no contexto transacional , pois qulquer erro o BD pode desfazer , ex: atualizar tebela 1,2,3 ,  1 e 2 foi um sucesso mas a 3 deu erro , o BD difaz as ateraçoes na 1 e 2
 	public void saveRestaurante(Restaurante restaurante) throws ValidatrionException {
 
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
@@ -38,7 +43,12 @@ public class RestauranteService {
 	}
 
 	private boolean validateEmail(String email, Integer id) {
-
+        Cliente clienteDB = clienteRepository.findByEmail(email);
+        
+        if(clienteDB != null) {
+        	return false;
+        }
+		
 		Restaurante restauranteDB  = restauranteRepository.findByEmail(email);					 // busca cliente pelo email
 
 		if (restauranteDB != null) { 													// se nao encontrar o cliente no bd , entao vc esta criando um novo , pode retornar true

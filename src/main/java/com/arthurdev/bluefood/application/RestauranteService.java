@@ -1,5 +1,7 @@
 package com.arthurdev.bluefood.application;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,8 @@ public class RestauranteService {
 	
 	@Autowired
 	private ImageService imageService;
-
+    
+	@Transactional
 	public void saveRestaurante(Restaurante restaurante) throws ValidatrionException {
 
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
@@ -29,7 +32,7 @@ public class RestauranteService {
 			restaurante=restauranteRepository.save(restaurante);             //de acordo com o gerenciamento de entidades da jpa , o metodo save(), retorna uma instancia de restaurante , entao qualquer mudandança sera refletido no banco de dados
 			restaurante.setLogotipoFileName();
 			imageService.uploadLogotipo(restaurante.getLogotipoFile(), restaurante.getLogotipo());
-			restauranteRepository.save(restaurante); 
+			
 			
 		}
 	}

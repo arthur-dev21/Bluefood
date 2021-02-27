@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.CollectionUtils;
+
 
 import com.arthurdev.bluefood.domain.cliente.Cliente;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
@@ -35,7 +35,7 @@ public class LoggedUser implements UserDetails {                                
 		}
 		
 		this.role = role;
-		this.roles =List.of(new SimpleGrantedAuthority("Role_" + role ));
+		this.roles =List.of(new SimpleGrantedAuthority("ROLE_"+role));
 	}
 	
 	@Override

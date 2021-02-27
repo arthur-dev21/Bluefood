@@ -1,7 +1,7 @@
 package com.arthurdev.bluefood.application.test;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,7 +20,7 @@ import com.arthurdev.bluefood.domain.restaurante.Restaurante;
 import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
 import com.arthurdev.bluefood.util.StringUtils;
 
-import ch.qos.logback.core.status.Status;
+
 
 @Component
 public class InsertDataForTesting {

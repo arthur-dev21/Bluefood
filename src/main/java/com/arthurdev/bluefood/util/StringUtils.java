@@ -1,5 +1,8 @@
 package com.arthurdev.bluefood.util;
 
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class StringUtils {
     
 	public static boolean isEmpty(String str) {
@@ -14,10 +17,10 @@ public class StringUtils {
 		if (isEmpty(rawString)) {
 			return null;
 		}
+	
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return encoder.encode(rawString);
 		
-		//PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		//return encoder.encode(rawString);
-		return null;
 	}
 	
 }

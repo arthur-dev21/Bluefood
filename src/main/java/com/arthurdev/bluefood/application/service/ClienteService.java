@@ -19,10 +19,10 @@ public class ClienteService {
 	private RestauranteRepository restauranteRepository;
     
 	@Transactional                                                                    // caso vc queira fazer mais de uma operaçao no BD é ideal que seja no contexto transacional , pois qulquer erro o BD pode desfazer , ex: atualizar tebela 1,2,3 ,  1 e 2 foi um sucesso mas a 3 deu erro , o BD difaz as ateraçoes na 1 e 2
-	public void saveCliente(Cliente cliente) throws ValidatrionException {
+	public void saveCliente(Cliente cliente) throws ValidationException {
 
 		if (!validateEmail(cliente.getEmail(), cliente.getId())) {
-			throw new ValidatrionException("o email esta duplicado");
+			throw new ValidationException("o email esta duplicado");
 		}
 		if (cliente.getId() != null) {
             Cliente clienteDB = clienteRepository.findById(cliente.getId()).orElseThrow();   //orElseThrow erro do sistema , erro de progamaçao

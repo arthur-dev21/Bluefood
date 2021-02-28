@@ -24,10 +24,10 @@ public class RestauranteService {
 	private ImageService imageService;
     
 	@Transactional                                                                       // caso vc queira fazer mais de uma operaçao no BD é ideal que seja no contexto transacional , pois qulquer erro o BD pode desfazer , ex: atualizar tebela 1,2,3 ,  1 e 2 foi um sucesso mas a 3 deu erro , o BD difaz as ateraçoes na 1 e 2
-	public void saveRestaurante(Restaurante restaurante) throws ValidatrionException {
+	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
 
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
-			throw new ValidatrionException("o email esta duplicado");
+			throw new ValidationException("o email esta duplicado");
 		}
 		if (restaurante.getId() != null) {
 			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow();   //orElseThrow erro do sistema , erro de progamaçao

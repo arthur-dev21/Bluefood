@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arthurdev.bluefood.application.service.ClienteService;
 import com.arthurdev.bluefood.application.service.RestauranteService;
-import com.arthurdev.bluefood.application.service.ValidatrionException;
+import com.arthurdev.bluefood.application.service.ValidationException;
 import com.arthurdev.bluefood.domain.cliente.Cliente;
 
 import com.arthurdev.bluefood.domain.restaurante.CategoriaRestauranteRepository;
@@ -51,7 +51,7 @@ public class PublicController {
 			try {
 				clienteService.saveCliente(cliente);
 				model.addAttribute("msg", "cliente gravado com sucesso");
-			} catch (ValidatrionException e) {
+			} catch (ValidationException e) {
 				errors.rejectValue("email", null, e.getMessage());
 			}
 		}
@@ -77,7 +77,7 @@ public class PublicController {
 			try {
 				restauranteService.saveRestaurante(restaurante);
 				model.addAttribute("msg", "restaurante gravado com sucesso");
-			} catch (ValidatrionException e) {
+			} catch (ValidationException e) {
 				errors.rejectValue("email", null, e.getMessage());
 			}
 		}

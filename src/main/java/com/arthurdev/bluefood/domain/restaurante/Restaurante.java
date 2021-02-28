@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -57,7 +58,11 @@ public class Restaurante extends Usuario {
 			joinColumns = @JoinColumn(name="restaurante_id"),                 // o nome da coluna que vai fazer refenecia a restaurante na nova tabela
 			inverseJoinColumns = @JoinColumn(name="categoria_restaurante_id") //relacionamento do outro lado que no caso é categoria
 			)                                                                 
-	private Set<CategoriaRestaurante>categorias= new HashSet<>(0);                            //o atributo do set "Categoriarestaurante" sera o "categoria_restaurante_id"
+	private Set<CategoriaRestaurante>categorias= new HashSet<>(0); 
+	//o atributo do set "Categoriarestaurante" sera o "categoria_restaurante_id"
+	
+	@OneToMany(mappedBy = "restaurante")
+	private Set<ItemCardapio> itensCardapio = new HashSet<>(0);
 	
 	//metodo para colocar um nome para o restaurante
 	public void setLogotipoFileName() {

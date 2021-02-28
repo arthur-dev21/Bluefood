@@ -1,11 +1,9 @@
 package com.arthurdev.bluefood.application.test;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -16,6 +14,8 @@ import com.arthurdev.bluefood.domain.cliente.Cliente;
 import com.arthurdev.bluefood.domain.cliente.ClienteRepository;
 import com.arthurdev.bluefood.domain.restaurante.CategoriaRestaurante;
 import com.arthurdev.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import com.arthurdev.bluefood.domain.restaurante.ItemCardapio;
+import com.arthurdev.bluefood.domain.restaurante.ItemCardapioRepository;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
 import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
 import com.arthurdev.bluefood.util.StringUtils;
@@ -34,19 +34,19 @@ public class InsertDataForTesting {
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
-//	@Autowired
-	//private ItemCardapioRepository itemCardapioRepository;
+	@Autowired
+	private ItemCardapioRepository itemCardapioRepository;
 	
 	//@Autowired
 	//private PedidoRepository pedidoRespository;
 
-	@EventListener                         //essa notaçao ele executa quando o spring é ativado
+	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Cliente[] clientes = clientes();
 		Restaurante[] restaurantes = restaurantes();
-		//itensCardapio(restaurantes);
+		itensCardapio(restaurantes);
 		
-		/*Pedido p = new Pedido();
+	/*	Pedido p = new Pedido();
 		p.setData(LocalDateTime.now());
 		p.setCliente(clientes[0]);
 		p.setRestaurante(restaurantes[0]);
@@ -54,7 +54,7 @@ public class InsertDataForTesting {
 		p.setSubtotal(BigDecimal.valueOf(10));
 		p.setTaxaEntrega(BigDecimal.valueOf(2));
 		p.setTotal(BigDecimal.valueOf(12.0));
-		pedidoRespository.save(p);*/
+		pedidoRespository.save(p); */
 	}
 	
 	private Restaurante[] restaurantes() {
@@ -164,5 +164,77 @@ public class InsertDataForTesting {
 		
 		Cliente[] array = new Cliente[clientes.size()]; 
 		return clientes.toArray(array);
+	}
+	
+	private void itensCardapio(Restaurante[] restaurantes) {
+		ItemCardapio ic = new ItemCardapio();
+		ic.setCategoria("Sanduíche");
+		ic.setDescricao("Delicioso sanduíche com molho");
+		ic.setNome("Double Cheese Burger Special");
+		ic.setPreco(BigDecimal.valueOf(23.8));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(true);
+		ic.setImagem("0001-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Sanduíche");
+		ic.setDescricao("Sanduíche padrão que mata a fome");
+		ic.setNome("Cheese Burger Simples");
+		ic.setPreco(BigDecimal.valueOf(17.8));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0006-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Sanduíche");
+		ic.setDescricao("Sanduíche natural com peito de peru");
+		ic.setNome("Sanduíche Natural da Casa");
+		ic.setPreco(BigDecimal.valueOf(11.8));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0007-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Bebida");
+		ic.setDescricao("Refrigerante com gás");
+		ic.setNome("Refrigerante Tradicional");
+		ic.setPreco(BigDecimal.valueOf(9));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0004-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Bebida");
+		ic.setDescricao("Suco natural e docinho");
+		ic.setNome("Suco de Laranja");
+		ic.setPreco(BigDecimal.valueOf(9));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0005-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Pizza");
+		ic.setDescricao("Pizza saborosa com cebola");
+		ic.setNome("Pizza de Calabresa");
+		ic.setPreco(BigDecimal.valueOf(38.9));
+		ic.setRestaurante(restaurantes[3]);
+		ic.setDestaque(false);
+		ic.setImagem("0002-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Japonesa");
+		ic.setDescricao("Delicioso Uramaki tradicional");
+		ic.setNome("Uramaki");
+		ic.setPreco(BigDecimal.valueOf(16.8));
+		ic.setRestaurante(restaurantes[4]);
+		ic.setDestaque(false);
+		ic.setImagem("0003-comida.png");
+		itemCardapioRepository.save(ic);
 	}
 }

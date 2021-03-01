@@ -2,6 +2,8 @@ package com.arthurdev.bluefood.application.service;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import com.arthurdev.bluefood.domain.cliente.Cliente;
 import com.arthurdev.bluefood.domain.cliente.ClienteRepository;
 import com.arthurdev.bluefood.domain.restaurante.Restaurante;
 import com.arthurdev.bluefood.domain.restaurante.RestauranteRepository;
+import com.arthurdev.bluefood.domain.restaurante.SearchFilter;
 
 @Service
 public class RestauranteService {
@@ -65,4 +68,9 @@ public class RestauranteService {
 		}
 		return true;
 	}
-}
+	
+	public List<Restaurante> search(SearchFilter filter) {
+		return restauranteRepository.findAll();
+	}
+	}
+

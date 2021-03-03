@@ -7,13 +7,14 @@
 
 	<div layout:fragment="content">
 	    <form id="form" method="get" th:object="${searchFilter}" th:action="@{/cliente/search}">
+					    <input id="searchType" type="hidden" th:field="*{searchType}" />
+					    <input id="categoriaId" type="hidden" th:field="*{categoriaId}" />
 			<div>
 				<h1>É hora de rangar!</h1>
 				
 					<fieldset>
-					    <input id="searchType" type="hidden" th:field="*{searchType}" />
 						<input type="text" th:field="*{texto}" placeholder="Buscar por...">
-						<input type="button" value="Procurar" onclick="serachRest(null);">
+						<input type="button" value="Procurar" onclick="searchRest(null);">
 					</fieldset>
 				
 				<br>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.arthurdev.bluefood.application.service.ClienteService;
 import com.arthurdev.bluefood.application.service.RestauranteService;
@@ -86,9 +87,12 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/search")
-	public String search(@ModelAttribute("searchFilter") SearchFilter filter, Model model) {
+	public String search(
+			@ModelAttribute("searchFilter") SearchFilter filter,
+			@RequestParam(value = "cmd", required = false) String command,
+			Model model) {
 		
-		filter.processFilter();
+		filter.processFilter(command);
 		
 		List<Restaurante> restaurantes = restauranteService.search(filter);
 		model.addAttribute("restaurantes", restaurantes);
